@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyApp - Download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .version {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .download-section {
+            margin: 40px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .file-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .instructions {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions ol {
+            color: #555;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #856404;
+        }
+
+        .warning-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .features {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .features h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .file-info {
+                gap: 20px;
+            }
+            
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5); }
+            100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">MA</div>
+        <h1>MyApp</h1>
+        <div class="version">Version 1.0.0</div>
+        <div class="description">
+            Experience the next generation of mobile applications with our feature-rich, user-friendly interface designed to enhance your daily productivity and entertainment.
+        </div>
+
+        <div class="features">
+            <h3>✨ Key Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🚀</span>
+                    <span>Lightning-fast performance</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <span>Beautiful, intuitive design</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <span>Enhanced security features</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span>Optimized for all devices</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <a href="#" class="download-btn pulse" id="downloadBtn">
+                📱 Download APK
+            </a>
+            
+            <div class="file-info">
+                <div class="info-item">
+                    <div class="info-label">Size</div>
+                    <div class="info-value">12.5 MB</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Version</div>
+                    <div class="info-value">1.0.0</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Updated</div>
+                    <div class="info-value">Aug 2025</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Installation Instructions</h3>
+            <ol>
+                <li>Download the APK file by clicking the button above</li>
+                <li>Go to your device <strong>Settings → Security</strong></li>
+                <li>Enable <strong>"Install from Unknown Sources"</strong> or <strong>"Allow from this source"</strong></li>
+                <li>Open your file manager and locate the downloaded APK</li>
+                <li>Tap on the APK file and follow the installation prompts</li>
+                <li>Launch the app and enjoy!</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <strong>Security Note:</strong> This app is not available on Google Play Store. Only download from trusted sources and disable "Unknown Sources" after installation for security.
+        </div>
+    </div>
+
+    <script>
+        // Add click tracking and dynamic updates
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Replace this URL with your actual APK download link
+            const downloadUrl = 'YOUR_APK_DOWNLOAD_LINK_HERE';
+            
+            if (downloadUrl === 'YOUR_APK_DOWNLOAD_LINK_HERE') {
+                alert('Please replace YOUR_APK_DOWNLOAD_LINK_HERE with your actual APK download link');
+                return;
+            }
+            
+            // Track download
+            console.log('Download initiated');
+            
+            // Start download
+            window.open(downloadUrl, '_blank');
+            
+            // Visual feedback
+            this.textContent = '⬇️ Downloading...';
+            setTimeout(() => {
+                this.innerHTML = '📱 Download APK';
+            }, 2000);
+        });
+
+        // Add some interactive elements
+        document.querySelector('.app-icon').addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    </script>
+</body>
+</html>
